@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UserInviteController;
 use App\Http\Controllers\UserLevelController;
 use Illuminate\Support\Facades\Route;
 
@@ -45,5 +46,13 @@ Route::put('/users/{user}', [UserLevelController::class, 'update'])
 Route::delete('/users/{user}', [UserController::class, 'destroy'])
     ->middleware(['auth'])
     ->name('users.destroy');
+
+Route::get('/users/invite', [UserInviteController::class, 'create'])
+    ->middleware(['auth'])
+    ->name('userinvites.create');
+
+Route::post('/users/invite', [UserInviteController::class, 'store'])
+    ->middleware(['auth'])
+    ->name('userinvites.store');
 
 require __DIR__.'/auth.php';

@@ -54,4 +54,16 @@ class UserPolicy
         }
         else return $loggedInUser->is($model);
     }
+
+    /**
+     * Determine whether the user can invite new users.
+     *
+     * @param  \App\Models\User  $loggedInUser the user that's trying to invite a new user
+     * @return \Illuminate\Auth\Access\Response|bool
+     */
+    public function invite(User $loggedInUser)
+    {
+        // only administrators are allowed to invite new users
+        return (UserLevel::Administrator == $loggedInUser->level);
+    }
 }
