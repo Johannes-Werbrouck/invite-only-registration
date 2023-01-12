@@ -8,6 +8,43 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+
+            {{-- MESSAGES --}}
+            @if(session('success'))
+                <div class="flex items-center bg-green-50 p-6 mb-6 w-full sm:rounded-lg sm:px-10 transition duration-700 ease-in-out"
+                     x-data="{show: true}"
+                     x-show="show"
+                     x-init="setTimeout(() => show = false, 30000)"
+                     x-transition>
+                    <div class="flex mx-auto">
+                        <svg class="h-6 w-6 flex-none fill-green-800 stroke-green-50 stroke-2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="11" />
+                            <path d="m8 13 2.165 2.165a1 1 0 0 0 1.521-.126L16 9" fill="none" />
+                        </svg>
+                        <p class="ml-2 text-green-800">
+                            {!! session('success') !!}
+                        </p>
+                    </div>
+                </div>
+            @endif
+
+            @if(session('error'))
+                <div class="flex items-center bg-red-100 p-6 mb-6 w-full sm:rounded-lg sm:px-10 transition duration-700 ease-in-out"
+                     x-data="{show: true}"
+                     x-show="show"
+                     x-init="setTimeout(() => show = false, 30000)"
+                     x-transition>
+                    <div class="flex mx-auto">
+                        <svg class="w-6 h-6 flex-none fill-red-800 stroke-red-100 stroke-2" fill="none" viewBox="0 0 24 24" stroke-width="1.5"  >
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9-.75a9 9 0 11-18 0 9 9 0 0118 0zm-9 3.75h.008v.008H12v-.008z" />
+                        </svg>
+                        <p class="ml-2 text-red-800">
+                            {!! session('error') !!}
+                        </p>
+                    </div>
+                </div>
+            @endif
+
             <div class="flex items-center">
                 <h1 class="text-2xl font-extrabold flex-1">Users</h1>
                 @can('invite', App\Models\User::class)
