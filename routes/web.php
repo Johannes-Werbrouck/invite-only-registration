@@ -55,4 +55,13 @@ Route::post('/users/invite', [UserInviteController::class, 'store'])
     ->middleware(['auth'])
     ->name('userinvites.store');
 
+// show the 'create new user' screen
+Route::get('/users/create', [UserController::class, 'create'])
+    ->middleware('signed')
+    ->name('users.create');
+
+// create the new user
+Route::post('/users/store',[UserController::class, 'store'])
+    ->name('users.store');
+
 require __DIR__.'/auth.php';
